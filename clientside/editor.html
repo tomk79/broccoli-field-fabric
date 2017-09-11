@@ -49,24 +49,9 @@
 			});
 			// console.log(w+2, h);
 
-			// create a wrapper around native canvas element (with id="c")
+			// FabricJS Canvas を生成
+			// データの復元は 呼び出し元(=親ウィンドウ=broccoli-field-fabric.js) が外部から行う。
 			window.fabricCanvas = new fabric.Canvas('fabric-canvas');
-			fabricCanvas.loadFromJSON(json);
-			fabricCanvas.isDrawingMode = true; // free drawing mode
-
-			// // create a rectangle object
-			// var rect = new fabric.Rect({
-			// 	left: 100,
-			// 	top: 100,
-			// 	fill: 'red',
-			// 	width: 20,
-			// 	height: 20
-			// });
-			//
-			// // "add" rectangle onto canvas
-			// fabricCanvas.add(rect);
-			//
-			// console.log(window.fabricCanvas);
 
 			function changeSize(){
 				var w = Number($('input[name=width]').val());

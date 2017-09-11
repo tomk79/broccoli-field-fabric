@@ -22890,17 +22890,27 @@ function hasOwnProperty(obj, prop) {
 				.append( $iframe
 					.css({
 						'width': '100%',
-						'height': 400
+						'height': 400,
+						'border': 'none'
 					})
 					.attr({
-						'src': __dirname+'/editor.html?json='+encodeURIComponent(JSON.stringify(data.json))+'&width='+(data.width||400)+'&height='+(data.height||300)
+						'src': __dirname+'/editor.html?json='+encodeURIComponent(JSON.stringify({}))+'&width='+(data.width||400)+'&height='+(data.height||300)
+						// 'src': __dirname+'/editor.html?json='+encodeURIComponent(JSON.stringify(data.json))+'&width='+(data.width||400)+'&height='+(data.height||300)
 					})
 				)
 			;
 
-			$(elm).html($rtn);
 
-			callback();
+			// iframeのロード完了イベント
+			$iframe.on('load', function(){
+				// alert('loaded');
+				// console.log(this.contentWindow);
+				var fabricCanvas = this.contentWindow.fabricCanvas;
+				fabricCanvas.loadFromJSON(JSON.stringify(data.json));
+				fabricCanvas.isDrawingMode = true; // free drawing mode
+				callback();
+			})
+			$(elm).html($rtn);
 			return;
 		}
 
