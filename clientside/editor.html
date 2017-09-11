@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	<head>
+		<title>FabricJS</title>
+		<script src="./libs/jquery/dist/jquery.js"></script>
+		<link rel="stylesheet" href="./libs/fabric.js/dist/fabric.css" />
+		<script src="./libs/fabric.js/dist/fabric.js"></script>
+		<style>
+			#default-board{
+				width: 100%;
+				height: 400px;
+			}
+		</style>
+		<script>
+			/**
+			 * GETパラメータをパースする
+			 */
+			var param = (function(){
+				var url = window.location.href;
+				var paramsArray = [];
+				parameters = url.split("?");
+				if( parameters.length > 1 ) {
+					var params = parameters[1].split("&");
+					for ( var i = 0; i < params.length; i++ ) {
+						var paramItem = params[i].split("=");
+						for( var i2 in paramItem ){
+							paramItem[i2] = decodeURIComponent( paramItem[i2] );
+						}
+						paramsArray.push( paramItem[0] );
+						paramsArray[paramItem[0]] = paramItem[1];
+					}
+				}
+				return paramsArray;
+			})();
+
+		</script>
+	</head>
+	<body>
+		<div>fabric.js</div>
+		<form method="post" action="javascript:;">
+			w: <input type="number" name="width" value="" /><br />
+			h: <input type="number" name="height" value="" /><br />
+		</form>
+		<div id="default-board"></div>
+		<script>
+			var w = Number(param.width||400);
+			var h = Number(param.height||300);
+			// console.log(w+2, h);
+			$('#default-board').width(w);
+			$('#default-board').height(h);
+
+			window.imageBoard = new DrawingBoard.Board('default-board', {
+				color: '#000',
+				background: param.src,
+				webStorage: false
+			});
+			console.log(window.imageBoard);
+
+			function changeSize(){
+				var w = Number($('input[name=width]').val());
+				var h = Number($('input[name=height]').val());
+				$('#default-board').width(w);
+				$('#default-board').height(h);
+			}
+
+			$(window).on('load', function(){
+				$('input[name=width]').val( w ).on('change', changeSize);
+				$('input[name=height]').val( h ).on('change', changeSize);
+			})
+		</script>
+	</body>
+</html>
