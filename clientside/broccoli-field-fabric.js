@@ -22841,6 +22841,7 @@ function hasOwnProperty(obj, prop) {
 				rtn.src = fieldData;
 			}
 			rtn.src = rtn.src||'';
+			rtn.json = rtn.json||{};
 			return rtn;
 		}
 
@@ -22874,10 +22875,12 @@ function hasOwnProperty(obj, prop) {
 			if(typeof(data) !== typeof({})){
 				data = {
 					'src':'',
+					'json':{},
 					'width': 400,
 					'height': 300
 				};
 			}
+			console.log(data);
 
 			var $rtn = $('<div>'),
 				$iframe = $('<iframe>')
@@ -22890,7 +22893,7 @@ function hasOwnProperty(obj, prop) {
 						'height': 400
 					})
 					.attr({
-						'src': __dirname+'/editor.html?src='+encodeURIComponent(data.src)+'&width='+(data.width||400)+'&height='+(data.height||300)
+						'src': __dirname+'/editor.html?json='+encodeURIComponent(JSON.stringify(data.json))+'&width='+(data.width||400)+'&height='+(data.height||300)
 					})
 				)
 			;
@@ -22908,11 +22911,13 @@ function hasOwnProperty(obj, prop) {
 			var $dom = $(elm);
 			// console.log($dom.html());
 			var iframeWindow = $dom.find('iframe').get(0).contentWindow;
-			var image = iframeWindow.imageBoard.canvas.toDataURL();
+			var json = iframeWindow.fabricCanvas.toJSON();
+			var image = iframeWindow.fabricCanvas.toDataURL('png')
 
 			if(typeof(data) !== typeof({})){
 				data = {};
 			}
+			data.json = json;
 			data.src = image;
 
 			data.width = iframeWindow.$('input[name=width]').val();
