@@ -32,7 +32,7 @@ broccoli.init(
 	{
 		/* 中略 */
 		'customFields': {
-			'fabric': window.broccoliFieldFabric
+			'fabric': window.BroccoliFieldFabric
 		},
 		/* 中略 */
 	} ,
@@ -48,14 +48,14 @@ broccoli.init(
 ```js
 var Broccoli = require('broccoli-html-editor');
 var broccoli = new Broccoli();
-var broccoliFieldFabric = require('broccoli-field-fabric');
+var BroccoliFieldFabric = require('broccoli-field-fabric');
 
 // 初期化を実行してください。
 broccoli.init(
 	{
 		/* 中略 */
 		'customFields': {
-			'fabric': broccoliFieldFabric
+			'fabric': BroccoliFieldFabric
 		} ,
 		/* 中略 */
 	},
@@ -79,7 +79,7 @@ If you want to use on "Pickles 2" and Desktop Tool, update your `config.php` of 
 			),
 			'frontend'=>array(
 				'file' => './vendor/tomk79/broccoli-field-fabric/clientside/broccoli-field-fabric.js',
-				'function' => 'window.broccoliFieldFabric'
+				'function' => 'window.BroccoliFieldFabric'
 			),
 		),
 	);

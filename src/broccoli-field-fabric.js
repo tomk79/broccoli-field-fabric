@@ -15,7 +15,7 @@
 		return '';
 	})().replace(/\\/g, '/').replace(/\/[^\/]*\/?$/, '');
 
-	window.broccoliFieldFabric = function(broccoli){
+	window.BroccoliFieldFabric = function(broccoli){
 
 		/**
 		 * データを正規化する
