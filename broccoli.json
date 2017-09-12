@@ -1,0 +1,11 @@
+{
+    "name": "FabricJS Field",
+    "type": "field",
+    "backend": {
+        "require": "serverside/main.js"
+    },
+    "frontend": {
+        "file" : "clientside/broccoli-field-fabric.min.js",
+        "function" : "window.BroccoliFieldFabric"
+    }
+}
